@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Solving untuk Organisator Sekolah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
+            color: #f8fafc;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+        .slide.active {
+            display: flex;
+            opacity: 1;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+        }
+
+        /* Presentation fullscreen polish */
+        #presentation-controls button {
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+        :fullscreen #presentation-container,
+        :-webkit-full-screen #presentation-container {
+            width: 100vw;
+            height: 100vh;
+        }
+        :fullscreen #presentation-controls,
+        :-webkit-full-screen #presentation-controls {
+            opacity: 0.65;
+            transition: opacity 0.2s ease;
+        }
+        :fullscreen #presentation-controls:hover,
+        :-webkit-full-screen #presentation-controls:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="w-screen h-screen m-0 p-0 select-none">
+
+
+    <!-- Fullscreen Control -->
+    <div id="presentation-controls" class="fixed top-4 right-4 z-[9999] flex items-center gap-2">
+        <button id="fullscreenBtn"
+                onclick="toggleFullscreen()"
+                title="Fullscreen (F)"
+                aria-label="Aktifkan fullscreen"
+                class="w-11 h-11 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-600/80 shadow-xl backdrop-blur-sm transition flex items-center justify-center">
+            <i id="fullscreenIcon" class="fa-solid fa-expand"></i>
+        </button>
+    </div>
+
+    <!-- Slide Container -->
+    <div id="presentation-container" class="relative w-full h-full">
+
+        <!-- SLIDE 1: Cover & Hook -->
+        <div class="slide active flex-col justify-between p-8 md:p-16 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950">
+            <div class="flex justify-between items-center">
+                <span class="px-4 py-1.5 rounded-full bg-cyan-500/10 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-cyan-500/20">
+                    <i class="fa-solid fa-bolt mr-2"></i>Masterclass OSIS & Ekstrakurikuler
+                </span>
+                <span class="text-slate-400 font-semibold text-sm">Slide 1 / 14</span>
+            </div>
+
+            <div class="max-w-4xl my-auto">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight mb-6">
+                    Masalah Datang Terus? <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">Jangan Nangis, Saatnya Jadi Pawang Masalah!</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-300 max-w-2xl leading-relaxed mb-8">
+                    Panduan survival anti-panik buat kamu pengurus organisasi sekolah yang ingin jago cari solusi tanpa drama dan tanpa korban perasaan.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex items-center gap-2 bg-slate-800/80 px-4 py-2 rounded-xl border border-slate-700 text-slate-200 text-sm font-medium">
+                        <i class="fa-solid fa-users text-cyan-400"></i> Teamwork
+                    </div>
+                    <div class="flex items-center gap-2 bg-slate-800/80 px-4 py-2 rounded-xl border border-slate-700 text-slate-200 text-sm font-medium">
+                        <i class="fa-solid fa-brain text-indigo-400"></i> Critical Thinking
+                    </div>
+                    <div class="flex items-center gap-2 bg-slate-800/80 px-4 py-2 rounded-xl border border-slate-700 text-slate-200 text-sm font-medium">
+                        <i class="fa-solid fa-shield-halved text-emerald-400"></i> Crisis Management
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-6 border-t border-slate-800">
+                <p class="text-slate-500 text-sm">Gunakan tombol panah keyboard atau navigasi bawah untuk lanjut.</p>
+                <button onclick="nextSlide()" class="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition shadow-lg shadow-cyan-500/25 flex items-center gap-2">
+                    Mulai Belajar <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: Realita Lapangan -->
+        <div class="slide flex-col justify-between p-8 md:p-16 bg-slate-900">
+            <div class="flex justify-between items-center">
+                <span class="px-4 py-1.5 rounded-full bg-indigo-500/10 text-indigo-400 font-bold text-xs uppercase tracking-widest border border-indigo-500/20">
+                    Realita Organisasi Sekolah
+                </span>
+                <span class="text-slate-400 font-semibold text-sm">Slide 2 / 14</span>
+            </div>
+
+            <div class="my-auto">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-3">Kenapa Problem Solving Itu Skill Wajib?</h2>
+                <p class="text-slate-400 text-lg mb-8">Di organisasi, rintangan itu menu wajib sehari-hari. Kalau gampang nyerah, event bisa bubar jalan!</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-slate-800/60 border border-slate-700/80 p-6 rounded-2xl hover:border-cyan-500/50 transition">
+                        <div class="w-12 h-12 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center text-xl mb-4 font-bold">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Proker Macet Total</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Proposal sponsor ditolak berkali-kali atau izin tempat mendadak dicabut pihak sekolah di hari H.</p>
+                    </div>
+                    <div class="bg-slate-800/60 border border-slate-700/80 p-6 rounded-2xl hover:border-cyan-500/50 transition">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4 font-bold">
+                            <i class="fa-solid fa-people-arrows"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Drama Antar Panitia</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Miskomunikasi, ketua divisi egois, atau anggota yang tiba-tiba menghilang tanpa kabar (ghosting).</p>
+                    </div>
+                    <div class="bg-slate-800/60 border border-slate-700/80 p-6 rounded-2xl hover:border-cyan-500/50 transition">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl mb-4 font-bold">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Tekanan Waktu Mepet</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Waktu mepet, beban kerja menumpuk, dan semua orang panik menyalahkan satu sama lain.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-6 border-t border-slate-800">
+                <button onclick="prevSlide()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                </button>
+                <button onclick="nextSlide()" class="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition flex items-center gap-2">
+                    Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+
+        <!-- SLIDE 3: Kisah Problem Solver - George de Mestral -->
+        <div class="slide flex-col justify-between p-8 md:p-16 bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950">
+            <div class="flex justify-between items-center">
+                <span class="px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 font-bold text-xs uppercase tracking-widest border border-emerald-500/20">
+                    Kisah Problem Solver
+                </span>
+                <span class="text-slate-400 font-semibold text-sm">Slide 3 / 14</span>
+            </div>
+
+            <div class="my-auto max-w-5xl mx-auto w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-6 items-stretch">
+                    <div class="bg-slate-800/80 border border-emerald-500/20 p-7 md:p-9 rounded-3xl relative overflow-hidden">
+                        <div class="absolute -right-8 -top-8 text-emerald-400/10 text-9xl pointer-events-none">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <span class="text-emerald-400 font-bold text-xs uppercase tracking-wider">Pernah lihat benda kecil ini?</span>
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-3 mb-4 leading-tight">
+                            Velcro: masalah kecil,<br><span class="text-emerald-400">ide yang kepikiran terus.</span>
+                        </h2>
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+                            Insinyur Swiss <b>George de Mestral</b> memperhatikan biji tanaman yang sering menempel pada pakaian dan bulu anjingnya setelah berjalan di alam.
+                        </p>
+                        <div class="mt-6 bg-emerald-950/40 border border-emerald-500/20 rounded-2xl p-4">
+                            <p class="text-emerald-300 text-sm font-semibold">
+                                <i class="fa-solid fa-magnifying-glass mr-2"></i>
+                                Ia tidak berhenti pada pertanyaan “Kenapa ini mengganggu?”
+                            </p>
+                            <p class="text-white text-base font-bold mt-1">Ia bertanya: “Bagaimana kalau mekanismenya justru saya manfaatkan?”</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/70 border border-slate-700 p-7 md:p-9 rounded-3xl">
+                        <h3 class="text-xl font-bold text-white mb-5 flex items-center gap-2">
+                            <i class="fa-solid fa-route text-cyan-400"></i>
+                            Cara berpikirnya
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex gap-4">
+                                <span class="w-9 h-9 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center font-bold shrink-0">1</span>
+                                <div><b class="text-white">Amati masalah</b><p class="text-slate-400 text-sm mt-1">Benda terus menempel dan terasa merepotkan.</p></div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="w-9 h-9 rounded-xl bg-indigo-500/15 text-indigo-400 flex items-center justify-center font-bold shrink-0">2</span>
+                                <div><b class="text-white">Cari tahu penyebab</b><p class="text-slate-400 text-sm mt-1">Ia melihat struktur kait kecil pada biji yang menempel.</p></div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="w-9 h-9 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center font-bold shrink-0">3</span>
+                                <div><b class="text-white">Balik sudut pandang</b><p class="text-slate-400 text-sm mt-1">“Gangguan” diubah menjadi mekanisme yang bisa dipakai.</p></div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center font-bold shrink-0">4</span>
+                                <div><b class="text-white">Uji sampai jadi solusi</b><p class="text-slate-400 text-sm mt-1">Lahir konsep pengikat hook-and-loop yang kita kenal sebagai Velcro.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5 text-center">
+                    <p class="text-lg md:text-xl font-extrabold text-white">
+                        <span class="text-emerald-400">Problem solver</span> bukan orang yang tidak punya masalah.
+                        <span class="text-slate-300">Ia melihat masalah dengan cara yang berbeda.</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-6 border-t border-slate-800">
+                <button onclick="prevSlide()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                </button>
+                <button onclick="nextSlide()" class="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition flex items-center gap-2">
+                    Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: Kisah Nyata Problem Solving Terkenal -->
+        <div class="slide flex-col justify-between p-8 md:p-16 bg-slate-900">
+            <div class="flex justify-between items-center">
+                <span class="px-4 py-1.5 rounded-full bg-amber-500/10 text-amber-400 font-bold text-xs uppercase tracking-widest border border-amber-500/20">
+                    Kisah Nyata Problem Solving
+                </span>
+                <span class="text-slate-400 font-semibold text-sm">Slide 4 / 14</span>
+            </div>
+
+            <div class="my-auto">
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-slate-800/80 border border-slate-700 p-8 rounded-3xl relative overflow-hidden">
+                        <div class="absolute right-6 top-6 text-amber-400/20 text-7xl font-black pointer-events-none">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
+                        <span class="text-amber-400 font-bold text-xs uppercase tracking-wider bg-amber-500/20 px-3 py-1 rounded-md">Studi Kasus Legendaris</span>
+                        <h3 class="text-2xl md:text-3xl font-extrabold text-white mt-4 mb-3">Misteri Lift Lambat di Gedung Pencakar Langit</h3>
+                        <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-6">
+                            Di sebuah gedung perkantoran mewah, para penyewa terus-menerus protes kepada pengelola karena kecepatan lift sangat lambat dan antrean jadi panjang membosankan. Pengelola awalnya hampir bangkrut karena harus mengeluarkan biaya miliaran untuk membongkar dan mengganti mesin lift baru yang lebih cepat.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-red-950/30 border border-red-500/30 p-4 rounded-xl">
+                                <span class="text-xs font-bold text-red-400 uppercase tracking-wider block mb-1">Solusi Mahal (Gagal Paham):</span>
+                                <p class="text-xs text-slate-300">Membeli mesin lift baru berkecepatan tinggi dengan biaya raksasa dan merusak dinding gedung.</p>
+                            </div>
+                            <div class="bg-emerald-950/30 border border-emerald-500/30 p-4 rounded-xl">
+                                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1">Solusi Cerdas (Out of the Box):</span>
+                                <p class="text-xs text-slate-300">Memasang cermin besar dan lampu estetik di setiap lobi lift. Hasilnya? Komplain langsung berhenti total karena orang sibuk merapikan penampilan dan cermin diri!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-6 border-t border-slate-800">
+                <button onclick="prevSlide()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                </button>
+                <button onclick="nextSlide()" class="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition flex items-center gap-2">
+                    Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: Deep Dive - Symptom (Gejala) -->
+        <div class="slide flex-col justify-between p-8 md:p-16 bg-slate-900">
+            <div class="flex justify-between items-center">
+                <span class="px-4 py-1.5 rounded-full bg-cyan-500/10 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-cyan-500/20">
+                    Deep Dive • Langkah 1
+                </span>
+                <span class="text-slate-400 font-semibold text-sm">Slide 5 / 14</span>
+            </div>
+
+            <div class="my-auto">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-3">1. Symptom (Gejala di Permukaan)</h2>
+                <p class="text-slate-400 text-lg mb-8">Jangan langsung percaya pada apa yang tampak. Gejala hanyalah alarm, bukan masalah utamanya.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-slate-800/80 border border-slate-700 p-8 rounded-2xl">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-stethoscope"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Apa itu Symptom?</h3>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            Symptom adalah tanda atau keluhan yang langsung terlihat mata saat masalah terjadi. Seperti demam pada tubuh, demam bukanlah penyakit, melainkan reaksi tubuh terhadap infeksi.
+                        </p>
+                        <div class="bg-cyan-950/30 border border-cyan-500/30 p-4 rounded-xl text-cyan-300 text-xs font-medium">
+                            Contoh di OSIS: Penonton pensi sekolah banyak yang menguap, ribut sendiri, dan keluar ruangan saat acara musik dimulai.
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/80 border border-slate-700 p-8 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-red-400 mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-triangle-exclamation"></i> Jebakan Pemula
+                            </h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Pengurus yang ceroboh langsung menghukum penonton atau memarahi panitia sie acara karena dianggap tidak becus membuat penonton tertib. Padahal itu baru gejala!
+                            </p>
+                        </div>
+                        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700/50 text-slate-300 text-xs">
+                            <b>Kunci Utama:</b> Catat gejalanya dengan tenang, lalu selidiki lebih dalam ke balik layar.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-6 border-t border-slate-800">
+                <button onclick="prevSlide()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                </button>
+                <button onclick="nextSlide()" class="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition flex items-center gap-2">
+                    Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: Deep Dive - Root Cause (Akar Masalah) -->
+        <div class="slide flex-col justify-between p-8 md:p-16 bg-slate-900">
+            <div class="flex justify-between items-center">
+                <span class="px-4 py-1.5 rounded-full bg-purple-500/10 text-purple-400 font-bold text-xs uppercase tracking-widest border border-purple-500/20">
+                    Deep Dive • Langkah 2
+                </span>
+                <span class="text-slate-400 font-semibold text-sm">Slide 6 / 14</span>
+            </div>
+
+            <div class="my-auto">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-3">2. Root Cause (Akar Masalah Sebenarnya)</h2>
+                <p class="text-slate-400 text-lg mb-8">Gunakan teknik "5 Whys" (Tanya Kenapa 5 Kali) untuk mencabut masalah sampai ke akar-akarnya.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-slate-800/80 border border-slate-700 p-8 rounded-2xl">
+                        <h3 class="text-xl font-bold text-purple-400 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-seedling"></i> Contoh Kasus: Penonton Ngantuk
+                        </h3>
+                        <ul class="space-y-2 text-slate-300 text-xs md:text-sm">
+                            <li><b>Kenapa 1?</b> Penonton ngantuk (Symptom).</li>
+                            <li><b>Kenapa 2?</b> Susunan acara pengisi panggung terlalu monoton.</li>
+                            <li><b>Kenapa 3?</b> Semua band tampil dengan genre musik lambat berturut-turut.</li>
+                            <li><b>Kenapa 4?</b> Sie acara tidak meminta rundown latihan dari tiap band sebelum hari H.</li>
+                            <li class="text-purple-300 font-bold"><b>Kenapa 5 (Root Cause):</b> Kurangnya koordinasi kurasi talenta dan tidak ada panduan rundown yang variatif!</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-800/80 border border-slate-700 p-8 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-bullseye text-purple-400"></i> Manfaat Menemukan Akar Masalah
+                            </h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Ketika akar masalah ditemukan (misalnya: kurang koordinasi kurasi rundown), solusinya jadi sangat tepat sasaran—yaitu membuat SOP kurasi pengisi acara di awal, bukan memarahi penonton.
+                            </p>
+                        </div>
+                        <div class="bg-purple-950/30 border border-purple-500/30 p-4 rounded-xl text-purple-300 text-xs font-semibold">
+                            "Solusi terbaik selalu lahir dari diagnosis akar masalah yang jujur."
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-6 border-t border-slate-800">
+                <button onclick="prevSlide()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                </button>
+                <button onclick="nextSlide()" class="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition flex items-center gap-2">
+                    Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: Deep Dive - Divergent Thinking (Ide Bebas) -->
+        <div class="slide flex-col justify-between p-8 md:p-16 bg-slate-900">
+            <div class="flex justify-between items-center">
+                <span class="px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 font-bold text-xs uppercase tracking-widest border border-emerald-500/20">
+                    Deep Dive • Langkah 3
+                </span>
+                <span class="text-slate-400 font-semibold text-sm">Slide 7 / 14</span>
+            </div>
+
+            <div class="my-auto">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-3">3. Divergent Thinking (Kumpulkan Ide Sebanyak Mungkin)</h2>
+                <p class="text-slate-400 text-lg mb-8">Di tahap ini, tidak ada ide yang dianggap "bodoh". Semakin liar dan kreatif, semakin bagus!</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-slate-800/80 border border-slate-700 p-8 rounded-2xl">
+                        <h3 class="text-xl font-bold text-emerald-400 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb"></i> Aturan Main Sesi Divergen
+                        </h3>
+                        <ul class="space-y-3 text-slate-300 text-sm">
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</span>
+                                <b>Tolak Kritik Sementara:</b> Dilarang mencela ide anggota lain sekecil atau seaneh apapun ide tersebut.
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</span>
+                                <b>Kejar Kuantitas:</b> Targetkan minimal 20 ide berbeda dalam 5 menit pertama brainstorming.
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">3</span>
+                                <b>Kombinasikan Ide:</b> Gabungkan ide A dan ide B jadi konsep baru yang segar.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-800/80 border border-slate-700 p-8 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-users text-emerald-400"></i> Contoh Kasus OSIS: Kurang Dana Bazar
+                            </h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Ide-ide liar yang muncul: Buka jasa curhat berbayar, adakan lomba e-sport antar kelas, jual merchandise unik buatan daur ulang, hingga ngamen keliling sekolah saat istirahat.
+                            </p>
+                        </div>
+                        <div class="bg-emerald-950/30 border border-emerald-500/30 p-4 rounded-xl text-emerald-300 text-xs font-semibold">
+                            "Kreativitas membunuh kepanikan. Semakin banyak opsi, semakin tenang pikiran."
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-6 border-t border-slate-800">
+                <button onclick="prevSlide()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                </button>
+                <button onclick="nextSlide()" class="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition flex items-center gap-2">
+                    Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: Deep Dive - Convergent Thinking (Penyaringan Solusi) -->
+        <div class="slide flex-col justify-between p-8 md:p-16 bg-slate-900">
+            <div class="flex justify-between items-center">
+                <span class="px-4 py-1.5 rounded-full bg-cyan-500/10 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-cyan-500/20">
+                    Deep Dive • Langkah 4
+                </span>
+                <span class="text-slate-400 font-semibold text-sm">Slide 8 / 14</span>
+            </div>
+
+            <div class="my-auto">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-3">4. Convergent Thinking (Saring & Pilih Solusi Terbaik)</h2>
+                <p class="text-slate-400 text-lg mb-8">Saatnya menyaring puluhan ide liar tadi menggunakan matriks realibilitas: Biaya, Waktu, & Dampak.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl mb-4 font-bold">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Cek Anggaran (Cost)</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Apakah ide ini ramah kantong siswa atau butuh modal besar yang berisiko tekor?</p>
+                    </div>
+                    <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl mb-4 font-bold">
+                            <i class="fa-solid fa-stopwatch"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Cek Waktu (Timeline)</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Apakah waktu persiapan mencukupi dengan tenaga panitia yang terbatas?</p>
+                    </div>
+                    <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4 font-bold">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Cek Dampak (Impact)</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Seberapa besar kepuasan peserta atau keuntungan yang dihasilkan untuk organisasi?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-6 border-t border-slate-800">
+                <button onclick="prevSlide()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                </button>
+                <button onclick="nextSlide()" class="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition flex items-center gap-2">
+                    Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: Deep Dive - Refleksi Pasca Event -->
+        <div class="slide flex-col justify-between p-8 md:p-16 bg-slate-900">
+            <div class="flex justify-between items-center">
+                <span class="px-4 py-1.5 rounded-full bg-indigo-500/10 text-indigo-400 font-bold text-xs uppercase tracking-widest border border-indigo-500/20">
+                    Deep Dive • Langkah 5
+                </span>
+                <span class="text-slate-400 font-semibold text-sm">Slide 9 / 14</span>
+            </div>
+
+            <div class="my-auto">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-3">5. Refleksi Pasca Event (Evaluasi Tanpa Baper)</h2>
+                <p class="text-slate-400 text-lg mb-8">Acara sudah selesai bukan berarti urusan beres. Adakan post-mortem meeting dengan metode "Start, Stop, Continue".</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-emerald-950/20 border border-emerald-500/30 p-6 rounded-2xl">
+                        <span class="text-emerald-400 font-bold text-xs uppercase tracking-wider bg-emerald-500/20 px-3 py-1 rounded-md">Start (Mulai)</span>
+                        <h3 class="text-xl font-bold text-white mt-3 mb-2">Hal Baru Apa?</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Praktik baik apa yang harus mulai diterapkan di event selanjutnya (misal: Google Calendar bersama).</p>
+                    </div>
+                    <div class="bg-red-950/20 border border-red-500/30 p-6 rounded-2xl">
+                        <span class="text-red-400 font-bold text-xs uppercase tracking-wider bg-red-500/20 px-3 py-1 rounded-md">Stop (Berhenti)</span>
+                        <h3 class="text-xl font-bold text-white mt-3 mb-2">Kebiasaan Buruk Apa?</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Hal tidak efektif apa yang harus dihentikan segera (misal: rapat ngaret molor 2 jam).</p>
+                    </div>
+                    <div class="bg-cyan-950/20 border border-cyan-500/30 p-6 rounded-2xl">
+                        <span class="text-cyan-400 font-bold text-xs uppercase tracking-wider bg-cyan-500/20 px-3 py-1 rounded-md">Continue (Lanjutkan)</span>
+                        <h3 class="text-xl font-bold text-white mt-3 mb-2">Apa yang Sukses?</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Strategi keren apa yang terbukti sukses dan wajib dipertahankan (misal: sistem tiket online).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-6 border-t border-slate-800">
+                <button onclick="prevSlide()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                </button>
+                <button onclick="nextSlide()" class="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition flex items-center gap-2">
+                    Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: Game 1 - Back-to-Back Drawing -->
+        <div class="slide flex-col justify-between p-8 md:p-16 bg-slate-900">
+            <div class="flex justify-between items-center">
+                <span class="px-4 py-1.5 rounded-full bg-purple-500/10 text-purple-400 font-bold text-xs uppercase tracking-widest border border-purple-500/20">
+                    Game Simulasi 1 • Tanpa Alat & Bahan
+                </span>
+                <span class="text-slate-400 font-semibold text-sm">Slide 10 / 14</span>
+            </div>
+
+            <div class="my-auto">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-3">Back-to-Back Drawing</h2>
+                <p class="text-slate-400 text-lg mb-8">Melatih komunikasi satu arah, kemampuan menyimak aktif, dan menyamakan persepsi tim.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-slate-800/80 border border-slate-700 p-8 rounded-2xl">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-gamepad"></i> Cara Bermain
+                        </h3>
+                        <ul class="space-y-3 text-slate-300 text-sm">
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</span>
+                                Dua orang anggota duduk saling memunggungi tanpa boleh saling menoleh atau melihat.
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</span>
+                                Satu orang memegang instruksi pola abstrak atau konsep rahasia.
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">3</span>
+                                Ia harus mendeskripsikan bentuk tersebut lewat kata-kata saja <b>tanpa menyebutkan nama bendanya</b>.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-800/80 border border-slate-700 p-8 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-purple-400 mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-lightbulb"></i> Hubungan dengan Organisasi
+                            </h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Banyak program kerja gagal bukan karena anggotanya malas, melainkan karena instruksi dari ketua atau koordinator divisi tidak jelas dan tidak ada konfirmasi pemahaman (*shared mental model*).
+                            </p>
+                        </div>
+                        <div class="bg-purple-950/30 border border-purple-500/30 p-4 rounded-xl text-purple-300 text-xs font-semibold">
+                            "Komunikasi yang baik bukan hanya tentang apa yang kamu ucapkan, tapi bagaimana pendengar menangkapnya."
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-6 border-t border-slate-800">
+                <button onclick="prevSlide()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                </button>
+                <button onclick="nextSlide()" class="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition flex items-center gap-2">
+                    Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: Game 2 - Reverse Engineering -->
+        <div class="slide flex-col justify-between p-8 md:p-16 bg-slate-900">
+            <div class="flex justify-between items-center">
+                <span class="px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 font-bold text-xs uppercase tracking-widest border border-emerald-500/20">
+                    Game Simulasi 2 • Tanpa Alat & Bahan
+                </span>
+                <span class="text-slate-400 font-semibold text-sm">Slide 11 / 14</span>
+            </div>
+
+            <div class="my-auto">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-3">Reverse Engineering / "What Else Can It Do?"</h2>
+                <p class="text-slate-400 text-lg mb-8">Melatih divergent thinking, berpikir *out of the box*, dan fleksibilitas kognitif di tengah keterbatasan.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-slate-800/80 border border-slate-700 p-8 rounded-2xl">
+                        <h3 class="text-xl font-bold text-emerald-400 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-gamepad"></i> Aturan Main
+                        </h3>
+                        <ul class="space-y-3 text-slate-300 text-sm">
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</span>
+                                Tunjuk satu benda acak di ruangan (contoh: kacamata, ID card, atau botol minum).
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</span>
+                                Dalam waktu 2 menit secara estafet, kelompok memikirkan fungsi alternatif benda tersebut di luar fungsi utamanya.
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">3</span>
+                                Semakin unik dan kreatif (tapi tetap logis secara fungsi), semakin tinggi poin kelompok tersebut.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-800/80 border border-slate-700 p-8 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-emerald-400 mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-lightbulb"></i> Hubungan dengan Organisasi
+                            </h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Saat budget minim atau alat acara tidak lengkap, pengurus yang kreatif tidak akan menyerah. Mereka tahu cara memanfaatkan sumber daya yang ada di sekitar secara maksimal (*resourcefulness*).
+                            </p>
+                        </div>
+                        <div class="bg-emerald-950/30 border border-emerald-500/30 p-4 rounded-xl text-emerald-300 text-xs font-semibold">
+                            "Batasan anggaran bukan alasan untuk gagal, tapi tantangan untuk berinovasi."
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-6 border-t border-slate-800">
+                <button onclick="prevSlide()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                </button>
+                <button onclick="nextSlide()" class="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition flex items-center gap-2">
+                    Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SLIDE 11: Studi Kasus Keseharian Organisasi -->
+        <div class="slide flex-col justify-between p-8 md:p-16 bg-slate-900">
+            <div class="flex justify-between items-center">
+                <span class="px-4 py-1.5 rounded-full bg-amber-500/10 text-amber-400 font-bold text-xs uppercase tracking-widest border border-amber-500/20">
+                    Simulasi Kasus Nyata
+                </span>
+                <span class="text-slate-400 font-semibold text-sm">Slide 12 / 14</span>
+            </div>
+
+            <div class="my-auto">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-3">Studi Kasus: Panic Attack di Hari H!</h2>
+                <p class="text-slate-400 text-lg mb-8">Bagaimana cara organisator tangguh menghadapi krisis mendadak di lapangan?</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-slate-800/80 border border-slate-700 p-8 rounded-2xl">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="px-3 py-1 bg-red-500/20 text-red-400 font-bold rounded-lg text-sm">Kasus A</span>
+                            <h3 class="text-xl font-bold text-white">Sponsor Utama Batal H-1</h3>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            Pemberi dana terbesar tiba-tiba membatalkan komitmen karena masalah internal perusahaan mereka, padahal dekorasi panggung sudah dibayar.
+                        </p>
+                        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700/50">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1">Solusi Cepat (Action Plan):</span>
+                            <p class="text-xs text-slate-300">Alihkan anggaran dari pos non-esensial (misal: konsumsi VIP diganti sederhana), hubungi *backup sponsor* alumni, atau buka donasi sukarela berhadiah tiket konser gratis.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/80 border border-slate-700 p-8 rounded-2xl">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="px-3 py-1 bg-amber-500/20 text-amber-400 font-bold rounded-lg text-sm">Kasus B</span>
+                            <h3 class="text-xl font-bold text-white">Ketua Divisi Menghilang</h3>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            Ketua seksi perlengkapan tidak bisa dihubungi saat truk logistik sudah di gerbang sekolah dan butuh penanggung jawab tanda tangan serah terima.
+                        </p>
+                        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700/50">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1">Solusi Cepat (Action Plan):</span>
+                            <p class="text-xs text-slate-300">Jangan tunggu! Aktifkan *delegasi darurat* dengan menunjuk wakil divisi atau anggota lain yang paham inventaris untuk mengambil alih komando sementara.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-6 border-t border-slate-800">
+                <button onclick="prevSlide()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                </button>
+                <button onclick="nextSlide()" class="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition flex items-center gap-2">
+                    Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SLIDE 12: Mindset Rangkuman -->
+        <div class="slide flex-col justify-between p-8 md:p-16 bg-slate-900">
+            <div class="flex justify-between items-center">
+                <span class="px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 font-bold text-xs uppercase tracking-widest border border-emerald-500/20">
+                    Pondasi Mental
+                </span>
+                <span class="text-slate-400 font-semibold text-sm">Slide 13 / 14</span>
+            </div>
+
+            <div class="my-auto">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-3">Mindset Dasar: Ubah Cara Pandangmu</h2>
+                <p class="text-slate-400 text-lg mb-8">Pemimpin hebat tidak mencari siapa yang harus disalahkan, melainkan apa yang harus diperbaiki.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Reactive Mindset -->
+                    <div class="bg-red-950/20 border-2 border-red-500/30 p-8 rounded-2xl relative overflow-hidden">
+                        <div class="absolute -right-6 -bottom-6 text-red-500/10 text-8xl font-black pointer-events-none">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <span class="text-red-400 font-bold text-xs uppercase tracking-wider bg-red-500/20 px-3 py-1 rounded-md">Mindset Pemula (Reaktif)</span>
+                        <h3 class="text-2xl font-bold text-white mt-4 mb-3">"Siapa nih yang bikin kacau?!"</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            Marah-marah di grup chat, mencari kambing hitam, menyudutkan anggota junior, dan membuat suasana rapat jadi penuh ketakutan serta kecemasan.
+                        </p>
+                    </div>
+                    <!-- Proactive Mindset -->
+                    <div class="bg-emerald-950/20 border-2 border-emerald-500/30 p-8 rounded-2xl relative overflow-hidden">
+                        <div class="absolute -right-6 -bottom-6 text-emerald-500/10 text-8xl font-black pointer-events-none">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <span class="text-emerald-400 font-bold text-xs uppercase tracking-wider bg-emerald-500/20 px-3 py-1 rounded-md">Mindset Pemimpin (Solutif)</span>
+                        <h3 class="text-2xl font-bold text-white mt-4 mb-3">"Oke, bagaimana cara bereskan ini?"</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            Tetap tenang, fokus memetakan kerusakan, mencari opsi tindakan darurat dengan cepat, dan mengevaluasi sistem setelah acara selesai.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-6 border-t border-slate-800">
+                <button onclick="prevSlide()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                </button>
+                <button onclick="nextSlide()" class="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition flex items-center gap-2">
+                    Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SLIDE 13: Kesimpulan & Action Plan -->
+        <div class="slide flex-col justify-between p-8 md:p-16 bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950 text-center">
+            <div class="flex justify-between items-center w-full">
+                <span class="px-4 py-1.5 rounded-full bg-cyan-500/10 text-cyan-400 font-bold text-xs uppercase tracking-widest border border-cyan-500/20">
+                    Penutup & Komitmen
+                </span>
+                <span class="text-slate-400 font-semibold text-sm">Slide 14 / 14</span>
+            </div>
+
+            <div class="max-w-3xl mx-auto my-auto">
+                <div class="w-20 h-20 bg-cyan-500/20 text-cyan-400 rounded-3xl mx-auto flex items-center justify-center text-3xl mb-6 border border-cyan-500/30 shadow-lg shadow-cyan-500/20">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+                    Jadilah Solusi di Setiap Event Sekolahmu!
+                </h2>
+                <p class="text-lg text-slate-300 leading-relaxed mb-8">
+                    Masalah di organisasi bukanlah musuh, melainkan ujian latihan agar kamu naik kelas menjadi pemimpin yang tangguh, solutif, dan diandalkan banyak orang.
+                </p>
+                <div class="bg-slate-800/80 border border-slate-700 px-8 py-5 rounded-2xl inline-block shadow-xl">
+                    <p class="text-cyan-400 font-bold text-lg">"Organisasi hebat lahir dari pemimpin yang tidak takut menghadapi masalah."</p>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center pt-6 border-t border-slate-800 w-full">
+                <button onclick="prevSlide()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Sebelumnya
+                </button>
+                <button onclick="goToSlide(0)" class="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl transition flex items-center gap-2 shadow-lg shadow-cyan-500/25">
+                    <i class="fa-solid fa-rotate-right"></i> Ulangi Presentasi
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Script -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            if (index < 0) {
+                currentSlide = slides.length - 1;
+            } else if (index >= slides.length) {
+                currentSlide = 0;
+            } else {
+                currentSlide = index;
+            }
+
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === currentSlide) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+        }
+
+
+        // Fullscreen presentation
+        function isFullscreen() {
+            return !!(document.fullscreenElement || document.webkitFullscreenElement);
+        }
+
+        function updateFullscreenButton() {
+            const icon = document.getElementById('fullscreenIcon');
+            const btn = document.getElementById('fullscreenBtn');
+            if (!icon || !btn) return;
+
+            if (isFullscreen()) {
+                icon.className = 'fa-solid fa-compress';
+                btn.title = 'Keluar dari fullscreen (Esc)';
+                btn.setAttribute('aria-label', 'Keluar dari fullscreen');
+            } else {
+                icon.className = 'fa-solid fa-expand';
+                btn.title = 'Fullscreen (F)';
+                btn.setAttribute('aria-label', 'Aktifkan fullscreen');
+            }
+        }
+
+        async function toggleFullscreen() {
+            try {
+                if (!isFullscreen()) {
+                    const target = document.documentElement;
+                    if (target.requestFullscreen) {
+                        await target.requestFullscreen();
+                    } else if (target.webkitRequestFullscreen) {
+                        target.webkitRequestFullscreen();
+                    }
+                } else {
+                    if (document.exitFullscreen) {
+                        await document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    }
+                }
+            } catch (error) {
+                console.warn('Fullscreen tidak tersedia:', error);
+            }
+            updateFullscreenButton();
+        }
+
+        document.addEventListener('fullscreenchange', updateFullscreenButton);
+        document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const tag = document.activeElement?.tagName?.toLowerCase();
+            const isTyping = tag === 'input' || tag === 'textarea' || tag === 'select';
+
+            if (e.key.toLowerCase() === 'f' && !isTyping) {
+                e.preventDefault();
+                toggleFullscreen();
+                return;
+            }
+
+            if (e.key === 'ArrowRight' || e.key === 'PageDown' || (e.key === ' ' && !isTyping)) {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        updateFullscreenButton();
+    </script>
+</body>
+</html>
